@@ -11,563 +11,248 @@
 <script type="text/javascript" src="js/minified/TimelineLite.min.js"></script>
 <script type="text/javascript" src="js/minified/plugins/CSSPlugin.min.js"></script>
 <script type="text/javascript" src="js/minified/easing/EasePack.min.js"></script>
-<<<<<<< HEAD
-<style>
-.panel{
-width:100%;
-height:100%;
-background-color:aqua;
-
-}
-
-.bg{
-background: #000; 
-float:left;
-overflow:visible;
-border-top: 1px solid #ccc;
-/*background-size:100%;*/
-background-repeat: no-repeat;
-background-position:80% 50%;
-}
-
-#one{background-image: url(img/slide_001_home.png); background-size:cover; /*background-position:0 100%;*/}
-#one .section{top:280px; width:50%;}
-#one .section p{font-size:34px; line-height:40px;}
-
-#two{background-image: url(img/slide_002.png);}
-#two .section{top:300px;}
-#two .section p{width:280px;}
-
-#three{background-image: url(img/slide_003.png); background-position:50% 50%;}
-#three .section{top:380px;}
-#three .section p{width:259px;}
-
-#four{background-image: url(img/slide_004.png);}
-#four .section{top:380px;}
-#four .section p{width:260px;}
-
-#five{background-image: url(img/slide_005.png);}
-#five .section{top:380px;width:42%;}
-
-#six{background-image: url(img/slide_006.png);}
-#six .section{top:90px;}
-
-#seven{background-image: url(img/slide_007.png); background-position:20% 20%;}
-#seven .section{left:530px; top: 490px; width:40%;}
-
-#eight{background-image: url(img/slide_008.png); background-position:50% 30%;}
-#eight .section {top:340px;width:80%;}
-
-#nine{background-image: url(img/slide_009.png); background-size:60%;}
-#nine .section {top:260px; width:22%;}
-
-#ten{background-image: url(img/slide_010.png);}
-#ten .section {top:320px;}
-#ten .section p {width:340px;}
-
-#eleven{background-image: url(img/slide_011.png); background-position:50% 10%;}
-#eleven .section {top:580px;width:85%;}
-
-#twelve .section {top:80px;width:85%;}
-#twelve .section table tr th {font-weight:bold; border-bottom:2px solid #fff; padding-bottom:10px;}
-#twelve .section table tr td {line-height:20px;}
-
-#thirteen .section {top:180px; width:85%;}
-
-#fourteen {/*background-image: url(img/slide_014.png); background-position:50% 90%;*/}
-#fourteen .section {top:270px; left:1%;}
-
-#fifteen {background-image: url(img/slide_015.png); background-size:cover; /*background-position:50% 65%;*/}
-#fifteen .section {top:35%;}
-#fifteen .section a, #fifteen .section a:visited {color:#fff; }
-
-ul{list-style-type: none;}
-li{position:relative;}
-#masker{overflow: hidden; width:100%; height:100%; }
-#nav{position:absolute; bottom:0; z-index: 900; width:100%; color:#fff;}
-#nav-center{margin:auto; width:520px;padding:5px; text-align:center; }
-#container{position:relative;height:100%; }
-
-.topborder{position:absolute; width:90%; height:3px; top:40px ;background-color:white; left:50%; margin-left:-45%;}
-.bottomborder{position:absolute; width:90%; height:16px; bottom:40px; background-color:white; left:50%; margin-left:-45%;}
-.section{position:relative;padding-left:6.653%;top: 60%;width:40%;color:white;}
-
-p{font-size: 18px; line-height:20px;}
-
-#circleAn{width:10px; height:10px; border-radius: 50%; position:relative; background-color:white;}
-
-#DIHscale{z-index: 20 ; border-radius: 50%; width:10px; height:10px; background-color:white;}
-.animator{z-index:200 ; position:absolute; top:0; left:0}
-.animator_mask{z-index: 210 ; position:absolute; top:49%; left:49%; opacity: 0;}
-.numnav{color:black;background-image:url('img/numbg.png'); width:16px; height:16px;display:block;float:left; background-repeat: no-repeat; font-size:10px; margin-left:6px;padding-top:3px; }
-a{text-decoration: none;}
-
-.ui-body-c .ui-link:visited {color:white}
-.ui-body-c .ui-link:visited{color:black}
-/*
-@media (min-width: 768px) and (orientation: portrait) { 
-	#one, #five{
-background-repeat: no-repeat;
-background-position-x: 200px;
-background-position-y: 100px;
-background-size:70%;
-}
-	
-}
-@media (min-width: 768px) and (orientation: landscape) { 
-	#one, #five{
-background-repeat: no-repeat;
-background-position-x: 380px;
-background-position-y: 100px;
-background-size:60%;
-}
-	
-}
-*/
-</style>
-
-<script>
-
-
-$(document).ready(function() {
-
-var bgSlides = $("ul li");
-
-$.each( bgSlides, function() {
-	var bgcolor = $(this).data("bg");
-  	$(this).css( "background-color" , bgcolor );
-});
-
-// initial load
-$('body').css('overflow','hidden');
-var h = $(window).height();
-var w = $(window).width();
-$('body').css('overflow','visible');
-
-var current = $( "ul li:first" ); 
-var next = $( "ul li:nth-child(2)" );
-var last = $( "ul li:last-child" );
-var color = $( current ).css( "background-color" );
-
-$('.bg').css('height',h+'px');
-$('.bg').css('width',w+'px');
-
-$('#container').css('width',w*3+'px');
-$('#masker').css('height',h+'px');
-
-// slide animations
-var tl = new TimelineLite;
-
-var tl_2 = new TimelineLite;
-//tl_2.to("#circleAn", 1, {css:{left:200}});
-tl_2.pause();
-
-var tl_14 = new TimelineLite;
-tl_14.to('#DIHscale', 1, {opacity:1,scaleX:48, scaleY:48});
-tl_14.pause();
-
-// resize window
-$(window).resize(function() {
-  $('body').css('overflow','hidden');
-  var hresize=$(window).height(); 
-  var wresize=$(window).width(); 
-  $('body').css('overflow','visible');
-  w = wresize;
-  
-  $('.bg').css('height',hresize+'px');
-  $('.bg').css('width',wresize +'px');
-  $('#masker').css('height', hresize+'px');
-  $('#container').css('width', wresize*3+'px');
-  $('#container').css('height', hresize+'px');
-});
-
-// left/right navigation
-$('#slide1').bind('click', animator); // go right
-$('#slide2').bind('click', reanimator); // go left
-
-// page navigation
-$('#slideNav .numnav').click(function() {
-	var gotoslide = $(this).attr("href");
-	gotoslide = gotoslide.replace("#",""); // changes from #X to X
-	var slideNumber = getCurrentSlide();
-	var variance = gotoslide-slideNumber; // number of slides to traverse
-	
-	if (variance > 0) {
-		animatorLoop(variance);
-	}
-	else if (variance < 0) {
-		variance *= -1;
-		reanimatorLoop(variance);
-	}
-});
-
-function animatorLoop(loop){
-	tl.clear();
-	tl.to("#container", 0.5, {css:{left:-w+"px"}, onComplete:suffix});
-	tl.restart();
-	for (var i = 1; i < loop; i++) {
-		var first = $('ul li:first');
-		$(first).appendTo('ul');
-		current = $( "ul li:first" ); 
-		next = $( "ul li:nth-child(2)" );
-		last = $( "ul li:last-child" );
-		color = $( current ).css( "background-color" );
-	}
-}
-
-function reanimatorLoop(loop){
-	for (var i = 1; i <= loop; i++) {	
-		var lasting = $('ul li:last-child');
-		$(lasting).prependTo('ul');
-		current = $( "ul li:first" ); 
-		next = $( "ul li:nth-child(2)" );
-		last = $( "ul li:last-child" );
-		color = $( current ).css( "background-color" );
-	}
-	$('#container').css('left',-w +'px');
-	tl.clear();
-	tl.to("#container", 0.5, {css:{left:0}, onComplete:prefix});
-	tl.restart();
-}
-
-function animator(){
-	tl.clear();
-	tl.to("#container", 0.5, {css:{left:-w+"px"}, onComplete:suffix});
-	tl.restart();
-}
-
-function suffix(){
-	$('#container').css('left',"0px");
-	var first = $('ul li:first');
-	$(first).appendTo('ul');
-	
-	current = $( "ul li:first" ); 
-	next = $( "ul li:nth-child(2)" );
-	last = $( "ul li:last-child" );
-	color = $( current ).css( "background-color" );
-	
-	updatePagination();
-	playAnimation(getCurrentSlide());
-}
-
-function reanimator(){
-	$('#container').css('left',-w +'px');
-	var lasting = $('ul li:last-child');
-	$(lasting).prependTo('ul');
-	current = $( "ul li:first" ); 
-	next = $( "ul li:nth-child(2)" );
-	last = $( "ul li:last-child" );
-	color = $( current ).css( "background-color" );
-	tl.clear();
-	tl.to("#container", 0.5, {css:{left:0}, onComplete:prefix});
-	tl.restart();
-}
-
-function prefix(){
-	playAnimation(getCurrentSlide());
-	updatePagination();
-}
-
-function playAnimation(slideNumber) {
-/*
-	if(slideNumber == 2){tl_2.play();}
-	else{tl_2.reverse();}
-	
-	if(slideNumber == 14){tl_14.play();}
-	else{tl_14.reverse();}
-*/
-	// update to switch case
-	
-	switch (slideNumber) {
-		case '2':
-			tl_2.play();
-			break;
-		case '14':
-			tl_14.play();
-			console.log('slide 14 play');
-			break;
-		default:
-			// no matching animation
-			resetAnimations();
-			console.log('reset animations');
-	}
-
-}
-
-function resetAnimations() {
-	tl_2.reverse();
-	tl_14.reverse();
-}
-
-function getCurrentSlide(){
-	var slideNumber = current.data("title");
-	slideNumber = slideNumber.replace("slide",""); // changes from slideY to Y
-	return slideNumber;
-}
-
-function updatePagination(){
-	$('.pageNav').html(getCurrentSlide());
-}
-
-// swipe left/right to navigate (tablet)
-$("#container").on("swiperight",function(){
-	$('#container').css('left',-w +'px');
-	var lasting = $('ul li:last-child');
-	$(lasting).prependTo('ul');
-	TweenMax.to("#container", 1, {css:{left:0, onComplete:prefix}});
-});
-	
-$("#container").on("swipeleft",function(){
-	TweenMax.to("#container", 1, {css:{left:-w+"px"}, onComplete:suffix});
-});
-
-}); 
-
-</script>
-=======
 <script type="text/javascript" src="js/site.js"></script>
->>>>>>> upstream/master
 </head>
 <body>
 <div id="masker">
 <div id="container">
-		
-		<ul id="slides">
-		
-		<!-- Slide 1 -->
-		<li class="panel bg" id="one" data-bg="#284788" data-title="slide1">
-			<!--<div class="topborder"></div>-->
-			<div class="section">
-			<!--<p><span style="color:#000;font-weight:bold;">The Data Integration Hub:</span><br />From Switchboards to Switches</p>-->
-			</div>
-			<!--<div class="bottomborder"></div>-->
-		</li>
-		
-		<!-- Slide 2 -->
-		<li class="panel bg" id="two" data-bg="#284788" data-title="slide2">
-		<div class="topborder"></div>	
-			<div class="section">
-			
-			<p>Remember when IT infrastructure was just a few applications talking to each other?<br/><br/>
+                
+                <ul id="slides">
+                
+                <!-- Slide 1 -->
+                <li class="panel bg" id="one" data-bg="#284788" data-title="slide1">
+                        <!--<div class="topborder"></div>-->
+                        <div class="section">
+                        <!--<p><span style="color:#000;font-weight:bold;">The Data Integration Hub:</span><br />From Switchboards to Switches</p>-->
+                        </div>
+                        <!--<div class="bottomborder"></div>-->
+                </li>
+                
+                <!-- Slide 2 -->
+                <li class="panel bg" id="two" data-bg="#284788" data-title="slide2">
+                <div class="topborder"></div>        
+                        <div class="section">
+                        
+                        <p>Remember when IT infrastructure was just a few applications talking to each other?<br/><br/>
 <span style="font-weight:bold;">Life was simple.</span><br/><br/>It was easy to move data from one application to another.</p>
-			</div>
-			<div class="bottomborder"></div>
-		</li>
-		
-		<!-- Slide 3 -->
-		<li class="panel bg" id="three" data-bg="#d62631" data-title="slide3">
-		<div class="topborder"></div>
-			<div class="section">
-			<p><span style="font-weight:bold;">Not anymore.</span><br /><br />The ascent of cloud, mobile, and social computing means organizations are faced with ever-increasing volumes of new types of data formats.</p>
-			</div>
-			<div class="bottomborder"></div>
-		</li>
-		
-		<!-- Slide 4 -->
-		<li class="panel bg" id="four" data-bg="#fa993a" data-title="slide4">
-		<div class="topborder"></div>
-			<div class="section">
-			<p>Between 2005 and 2010, digital data grew from 130 to 1227 exabytes.<br /><br />And data is predicted to grow at least 75 times more by 2020.</p>
-			</div>
-			<div class="bottomborder"></div>
-		</li>
-		
-		<!-- Slide 5 -->
-		<li class="panel bg" id="five" data-bg="#284788" data-title="slide5">
-		<div class="topborder"></div>
-			<div class="section">
-			<p style="border-bottom:2px solid #fff;padding-bottom:15px;margin-bottom:15px;font-size:28px;line-height:42px;"><span style="font-size:48px;">250</span> systems<br /><span style="font-size:48px;">x700</span> processes</p>
-			<p>Today, the average enterprise has 250 systems running an average of 700 processes that IT needs to support.<br /><br />
+                        </div>
+                        <div class="bottomborder"></div>
+                </li>
+                
+                <!-- Slide 3 -->
+                <li class="panel bg" id="three" data-bg="#d62631" data-title="slide3">
+                <div class="topborder"></div>
+                        <div class="section">
+                        <p><span style="font-weight:bold;">Not anymore.</span><br /><br />The ascent of cloud, mobile, and social computing means organizations are faced with ever-increasing volumes of new types of data formats.</p>
+                        </div>
+                        <div class="bottomborder"></div>
+                </li>
+                
+                <!-- Slide 4 -->
+                <li class="panel bg" id="four" data-bg="#fa993a" data-title="slide4">
+                <div class="topborder"></div>
+                        <div class="section">
+                        <p>Between 2005 and 2010, digital data grew from 130 to 1227 exabytes.<br /><br />And data is predicted to grow at least 75 times more by 2020.</p>
+                        </div>
+                        <div class="bottomborder"></div>
+                </li>
+                
+                <!-- Slide 5 -->
+                <li class="panel bg" id="five" data-bg="#284788" data-title="slide5">
+                <div class="topborder"></div>
+                        <div class="section">
+                        <p style="border-bottom:2px solid #fff;padding-bottom:15px;margin-bottom:15px;font-size:28px;line-height:42px;"><span style="font-size:48px;">250</span> systems<br /><span style="font-size:48px;">x700</span> processes</p>
+                        <p>Today, the average enterprise has 250 systems running an average of 700 processes that IT needs to support.<br /><br />
 Yet the current data infrastructure is fragmented, creating data silos that restrict a company's information potential. Companies need a centralized, efficient way to manage and monitor information.</p>
-			</div>
-			<div class="bottomborder"></div>
-		</li>
-		
-		<!-- Slide 6 -->
-		<li class="panel bg" id="six" data-bg="#d62631" data-title="slide6">
-		<div class="topborder"></div>
-			<div class="section">
-			<p style="border-bottom:2px solid #fff;margin-bottom:15px;">Organizations across the board are suffering.<br /><span style="font-size:150px;font-weight:bold;line-height:160px;">40%</span></p>
-			<p>of IT budgets are devoted to integration. But most companies still focus on point-to-point integration strategies, causing unnecessary expense, waste, risk, and delay.<span style="font-size:50%;position:relative;top:-6px;">1</span></p>
-			</div>
-			<p style="position:absolute; bottom:65px; right:5%; font-size:10px; color:#fff;">1. Schmidt, John. Lean Integration: An Integration Factory Approach to Business Agility. May 2010.</p>
-			<div class="bottomborder"></div>
-		</li>
-		
-		<!-- Slide 7 -->
-		<li class="panel bg" id="seven" data-bg="#fa993a" data-title="slide7">
-		<div class="topborder"></div>
-			<div class="section">
-			<p>Individual systems talk to each other in silos, in different languages, about different things, and at all the wrong times. Communication isn't consistent or standardized.<br /><br />That kind of architecture can't handle the droves of information in flow, which results in impenetrable communication "hairballs".</p>
-			</div>
-			<div class="bottomborder"></div>
-		</li>
-		
-		<!-- Slide 8 -->
-		<li class="panel bg" id="eight" data-bg="#284788" data-title="slide8">
-		<div class="topborder"></div>
-			<div class="section">
-			<p style="font-weight:bold;width:340px;margin-bottom:60px;">And those hairballs are made of some pretty obnoxious clumps.</p>
-			<p class="bullets" style="float:left;">
-			&#149; Fragile and complex environment<br />
-			&#149; Complicated change management<br />
-			&#149; Can't follow business acceleration<br />
-			&#149; Extremely costly to run<br />
-			</p>
-			<p class="bullets" style="float:right;">
-			&#149; Many redundancies<br />
-			&#149; Governance challenges<br />
-			&#149; No visibility into relationships between data<br />
-			&#149; Data duplicated, inconsistent, and not trusted
-			</p>
-			</div>
-			<div class="bottomborder"></div>
-		</li>
-		
-		<!-- Slide 9 -->
-		<li class="panel bg" id="nine" data-bg="#d62631" data-title="slide9">
-		<div class="topborder"></div>
-			<div class="section">
-			<p>The picture of enterprise data is a lot like telecommunication, if you think about it.<br /><br />Remember how phones worked in the early days? Operators would have to manually move switches around to connect calls, and there was no centralized hub for routing information. The process was slow, fragmented, and highly prone to breaking down.</p>
-			</div>
-			<div class="bottomborder"></div>
-		</li>
-		
-		<!-- Slide 10 -->
-		<li class="panel bg" id="ten" data-bg="#fa993a" data-title="slide10">
-		<div class="topborder"></div>
-			<div class="section">
-			<p>Today, telephony switches and IP switching allow people around the world to connect instantly with the push of a button, and power complex connections for applications like video conferencing and chat. Centralization has made communication exponentially faster, more reliable, and more seamless than ever.</p>
-			</div>
-			<div class="bottomborder"></div>
-		</li>
-		
-		<!-- Slide 11 -->
-		<li class="panel bg" id="eleven" data-bg="#284788" data-title="slide11">
-		<div class="topborder"></div>
-			<div class="section">
-			<p style="width:46%;float:left;">The Data Integration Hub is to IT infrastructure what modern switches are to telecommunication.</p>
-			<p style="width:45%;float:right;">It's one centralized location that acts like a traffic cop &ndash; receiving, monitoring, and sending information &ndash; so data can move quickly, accurately, and efficiently.</p>
-			</div>
-			<div class="bottomborder"></div>
-		</li>
-		
-		<!-- Slide 12 -->
-		<li class="panel bg" id="twelve" data-bg="#d62631" data-title="slide12">
-		<div class="topborder"></div>
-			<div class="section">
-			<p>The DIH is the first-ever data integration application for IT. Rather than solve problems ad hoc, now you can add a whole new layer to your IT network that manages all your application data integration needs.<br /><br />So your former hairballs turn into clean, meaningful, and manageable threads.</p><br /><br />
-			<table cellpadding="10" cellspacing="10">
-				<tr>
-					<th width="60%">What the DIH does</th>
-					<th width="20" style="border-bottom:0px;"></th>
-					<th>What that does for you</th>
-				</tr>
-				<tr>
-					<td>
-						<br /><span style="font-weight:bold;">Self-managed persistency</span><br />
-						Support any latency mode with automated storage, and reduce transactional system overhead by accessing data sources only once.<br /><br />
-					</td><td></td>
-					<td><br />Right-time data delivery</td>
-				</tr>
-				<tr>
-					<td>
-						<span style="font-weight:bold;">Complete data management</span><br />
-						Regain trust in your data, and promote data reuse through customizable subscription data catalogs.<br /><br />
-					</td><td></td>
-					<td>Trusted data for all</td>
-				</tr>
-				<tr>
-					<td>
-						<span style="font-weight:bold;">Efficient interaction management</span><br />
-						Reduce application interdependence through "publish and subscribe" integration. Add, change, or retire systems with ease.<br /><br />
-					</td><td></td>
-					<td>Untangle the hairball &ndash; decouple your applications</td>
-				</tr>
-				<tr>
-					<td>
-						<span style="font-weight:bold;">Holistic monitoring and control</span><br />
-						Gain end-to-end visibility over data integration processes, and know about a problem before it impacts the business. See the complete lineage of data flows, and know the impact changes before it's too late.
-					</td><td></td>
-					<td>See what you're missing</td>
-				</tr>
-			</table>
-			</div>
-			<div class="bottomborder"></div>
-		</li>
-		
-		<!-- Slide 13 -->
-		<li class="panel bg" id="thirteen" data-bg="#fa993a" data-title="slide13">
-		<div class="topborder"></div>
-			<div class="section">
-			<p style="width:410px;">In other words, you spend a lot less time fixing your broken data &ndash; and a lot less money on inefficient integration.</p>
-			<div class="factLeft">
-			<p style="font-size:165px; line-height:100px; border-bottom:2px solid #fff; padding-bottom:20px; margin-bottom:20px; font-weight:bold;">20<span style="font-size:130px;">%</span></p>
-			<p>Through 2015, organizations implementing a coherent data management infrastructure will outperform their industry peers financially by more than 20%.<span style="font-size:50%;position:relative;top:-6px;">2</span></p></div>
-			<div class="factRight">
-			<p style="font-size:100px; line-height:100px; border-bottom:2px solid #fff; padding-bottom:20px; margin-bottom:20px; font-weight:bold; letter-spacing:-3px;"><span style="font-size:130px; letter-spacing:0px;">$2</span>billion</p>
-			<p>Annual revenue improvement due to higher employee productivity when data's usability increases by just 10%.<span style="font-size:50%;position:relative;top:-6px;">3</span></p>
-			</div>
-			</div>
-			<p style="position:absolute; bottom:65px; left:5%; font-size:10px; color:#fff;">2.	James Jeude. The Information Factory: A Model-driven Framework. June 2013.</p>
-			<p style="position:absolute; bottom:65px; right:5%; font-size:10px; color:#fff;">3. IDC Worldwide Big Data Technology and Services 2012-2015 Forecast, doc #233485, March 2012.</p>
-			<div class="bottomborder"></div>
-		</li>
-		
-		<!-- Slide 14 -->
-		<li class="panel bg" id="fourteen" data-bg="#284788" data-title="slide14">
-		<div class="topborder"></div>
-			<div class="section">
-			<p style="margin-bottom: 20px; padding-bottom: 25px; border-bottom: 2px solid #fff;">The DIH is a philosophical shift in the way enterprise data integration is managed.<br /><br /><span style="font-weight:bold;">And the impact is going to be huge.</span></p>
-			<p style="font-family:Verdana; line-height:28px; font-style:italic; font-size:19px;">"Currently, we spend over &euro;180M a year on data integration efforts. We believe the DIH can cut our yearly expenses by &euro;40M."</p>
-			<p style="text-align:right;font-family:Verdana; font-size:15px; line-height:28px;">&ndash; A large international bank</p>
-			</div>
-			<div id="anima_container" style="position:absolute;left:50%; top:17%; height:500px; width:500px; ">
-				<div class="animator"><img src="img/reverse014.png"/></div>
-				<div class="animator_mask" id="DIHscale"></div>
-		    </div>
-			<div class="bottomborder"></div>
-		</li>
-		
-		<!-- Slide 15 -->
-		<li class="panel bg" id="fifteen" data-bg="#d62631" data-title="slide15">
-		<div class="topborder"></div>
-			<!--<div class="section">
-			<p>At the rate machine data is growing, soon integration will be the only way.<br /><br /><span style="font-weight:bold;">Are you ready?</span></p>
-			</div>
-			<p style="position:absolute;padding-left:6.653%; width:40%; color:#fff;bottom:20%;">Answer a few questions to see if the DIH can help you put your information potential to work.<br /><br /><span style="font-weight:bold;"><a href="#" style="color:#fff;">Take the survey</a></span></p>
-			--><div class="bottomborder"></div>
-		</li>
-	</ul>
-		
+                        </div>
+                        <div class="bottomborder"></div>
+                </li>
+                
+                <!-- Slide 6 -->
+                <li class="panel bg" id="six" data-bg="#d62631" data-title="slide6">
+                <div class="topborder"></div>
+                        <div class="section">
+                        <p style="border-bottom:2px solid #fff;margin-bottom:15px;">Organizations across the board are suffering.<br /><span style="font-size:150px;font-weight:bold;line-height:160px;">40%</span></p>
+                        <p>of IT budgets are devoted to integration. But most companies still focus on point-to-point integration strategies, causing unnecessary expense, waste, risk, and delay.<span style="font-size:50%;position:relative;top:-6px;">1</span></p>
+                        </div>
+                        <p style="position:absolute; bottom:65px; right:5%; font-size:10px; color:#fff;">1. Schmidt, John. Lean Integration: An Integration Factory Approach to Business Agility. May 2010.</p>
+                        <div class="bottomborder"></div>
+                </li>
+                
+                <!-- Slide 7 -->
+                <li class="panel bg" id="seven" data-bg="#fa993a" data-title="slide7">
+                <div class="topborder"></div>
+                        <div class="section">
+                        <p>Individual systems talk to each other in silos, in different languages, about different things, and at all the wrong times. Communication isn't consistent or standardized.<br /><br />That kind of architecture can't handle the droves of information in flow, which results in impenetrable communication "hairballs".</p>
+                        </div>
+                        <div class="bottomborder"></div>
+                </li>
+                
+                <!-- Slide 8 -->
+                <li class="panel bg" id="eight" data-bg="#284788" data-title="slide8">
+                <div class="topborder"></div>
+                        <div class="section">
+                        <p style="font-weight:bold;width:340px;margin-bottom:60px;">And those hairballs are made of some pretty obnoxious clumps.</p>
+                        <p class="bullets" style="float:left;">
+                        &#149; Fragile and complex environment<br />
+                        &#149; Complicated change management<br />
+                        &#149; Can't follow business acceleration<br />
+                        &#149; Extremely costly to run<br />
+                        </p>
+                        <p class="bullets" style="float:right;">
+                        &#149; Many redundancies<br />
+                        &#149; Governance challenges<br />
+                        &#149; No visibility into relationships between data<br />
+                        &#149; Data duplicated, inconsistent, and not trusted
+                        </p>
+                        </div>
+                        <div class="bottomborder"></div>
+                </li>
+                
+                <!-- Slide 9 -->
+                <li class="panel bg" id="nine" data-bg="#d62631" data-title="slide9">
+                <div class="topborder"></div>
+                        <div class="section">
+                        <p>The picture of enterprise data is a lot like telecommunication, if you think about it.<br /><br />Remember how phones worked in the early days? Operators would have to manually move switches around to connect calls, and there was no centralized hub for routing information. The process was slow, fragmented, and highly prone to breaking down.</p>
+                        </div>
+                        <div class="bottomborder"></div>
+                </li>
+                
+                <!-- Slide 10 -->
+                <li class="panel bg" id="ten" data-bg="#fa993a" data-title="slide10">
+                <div class="topborder"></div>
+                        <div class="section">
+                        <p>Today, telephony switches and IP switching allow people around the world to connect instantly with the push of a button, and power complex connections for applications like video conferencing and chat. Centralization has made communication exponentially faster, more reliable, and more seamless than ever.</p>
+                        </div>
+                        <div class="bottomborder"></div>
+                </li>
+                
+                <!-- Slide 11 -->
+                <li class="panel bg" id="eleven" data-bg="#284788" data-title="slide11">
+                <div class="topborder"></div>
+                        <div class="section">
+                        <p style="width:46%;float:left;">The Data Integration Hub is to IT infrastructure what modern switches are to telecommunication.</p>
+                        <p style="width:45%;float:right;">It's one centralized location that acts like a traffic cop &ndash; receiving, monitoring, and sending information &ndash; so data can move quickly, accurately, and efficiently.</p>
+                        </div>
+                        <div class="bottomborder"></div>
+                </li>
+                
+                <!-- Slide 12 -->
+                <li class="panel bg" id="twelve" data-bg="#d62631" data-title="slide12">
+                <div class="topborder"></div>
+                        <div class="section">
+                        <p>The DIH is the first-ever data integration application for IT. Rather than solve problems ad hoc, now you can add a whole new layer to your IT network that manages all your application data integration needs.<br /><br />So your former hairballs turn into clean, meaningful, and manageable threads.</p><br /><br />
+                        <table cellpadding="10" cellspacing="10">
+                                <tr>
+                                        <th width="60%">What the DIH does</th>
+                                        <th width="20" style="border-bottom:0px;"></th>
+                                        <th>What that does for you</th>
+                                </tr>
+                                <tr>
+                                        <td>
+                                                <br /><span style="font-weight:bold;">Self-managed persistency</span><br />
+                                                Support any latency mode with automated storage, and reduce transactional system overhead by accessing data sources only once.<br /><br />
+                                        </td><td></td>
+                                        <td><br />Right-time data delivery</td>
+                                </tr>
+                                <tr>
+                                        <td>
+                                                <span style="font-weight:bold;">Complete data management</span><br />
+                                                Regain trust in your data, and promote data reuse through customizable subscription data catalogs.<br /><br />
+                                        </td><td></td>
+                                        <td>Trusted data for all</td>
+                                </tr>
+                                <tr>
+                                        <td>
+                                                <span style="font-weight:bold;">Efficient interaction management</span><br />
+                                                Reduce application interdependence through "publish and subscribe" integration. Add, change, or retire systems with ease.<br /><br />
+                                        </td><td></td>
+                                        <td>Untangle the hairball &ndash; decouple your applications</td>
+                                </tr>
+                                <tr>
+                                        <td>
+                                                <span style="font-weight:bold;">Holistic monitoring and control</span><br />
+                                                Gain end-to-end visibility over data integration processes, and know about a problem before it impacts the business. See the complete lineage of data flows, and know the impact changes before it's too late.
+                                        </td><td></td>
+                                        <td>See what you're missing</td>
+                                </tr>
+                        </table>
+                        </div>
+                        <div class="bottomborder"></div>
+                </li>
+                
+                <!-- Slide 13 -->
+                <li class="panel bg" id="thirteen" data-bg="#fa993a" data-title="slide13">
+                <div class="topborder"></div>
+                        <div class="section">
+                        <p style="width:410px;">In other words, you spend a lot less time fixing your broken data &ndash; and a lot less money on inefficient integration.</p>
+                        <div class="factLeft">
+                        <p style="font-size:165px; line-height:100px; border-bottom:2px solid #fff; padding-bottom:20px; margin-bottom:20px; font-weight:bold;">20<span style="font-size:130px;">%</span></p>
+                        <p>Through 2015, organizations implementing a coherent data management infrastructure will outperform their industry peers financially by more than 20%.<span style="font-size:50%;position:relative;top:-6px;">2</span></p></div>
+                        <div class="factRight">
+                        <p style="font-size:100px; line-height:100px; border-bottom:2px solid #fff; padding-bottom:20px; margin-bottom:20px; font-weight:bold; letter-spacing:-3px;"><span style="font-size:130px; letter-spacing:0px;">$2</span>billion</p>
+                        <p>Annual revenue improvement due to higher employee productivity when data's usability increases by just 10%.<span style="font-size:50%;position:relative;top:-6px;">3</span></p>
+                        </div>
+                        </div>
+                        <p style="position:absolute; bottom:65px; left:5%; font-size:10px; color:#fff;">2.        James Jeude. The Information Factory: A Model-driven Framework. June 2013.</p>
+                        <p style="position:absolute; bottom:65px; right:5%; font-size:10px; color:#fff;">3. IDC Worldwide Big Data Technology and Services 2012-2015 Forecast, doc #233485, March 2012.</p>
+                        <div class="bottomborder"></div>
+                </li>
+                
+                <!-- Slide 14 -->
+                <li class="panel bg" id="fourteen" data-bg="#284788" data-title="slide14">
+                <div class="topborder"></div>
+                        <div class="section">
+                        <p style="margin-bottom: 20px; padding-bottom: 25px; border-bottom: 2px solid #fff;">The DIH is a philosophical shift in the way enterprise data integration is managed.<br /><br /><span style="font-weight:bold;">And the impact is going to be huge.</span></p>
+                        <p style="font-family:Verdana; line-height:28px; font-style:italic; font-size:19px;">"Currently, we spend over &euro;180M a year on data integration efforts. We believe the DIH can cut our yearly expenses by &euro;40M."</p>
+                        <p style="text-align:right;font-family:Verdana; font-size:15px; line-height:28px;">&ndash; A large international bank</p>
+                        </div>
+                        <div id="anima_container" style="position:absolute;left:50%; top:17%; height:500px; width:500px; ">
+                                <div class="animator"><img src="img/reverse014.png"/></div>
+                                <div class="animator_mask" id="DIHscale"></div>
+                    </div>
+                        <div class="bottomborder"></div>
+                </li>
+                
+                <!-- Slide 15 -->
+                <li class="panel bg" id="fifteen" data-bg="#d62631" data-title="slide15">
+                <div class="topborder"></div>
+                        <!--<div class="section">
+                        <p>At the rate machine data is growing, soon integration will be the only way.<br /><br /><span style="font-weight:bold;">Are you ready?</span></p>
+                        </div>
+                        <p style="position:absolute;padding-left:6.653%; width:40%; color:#fff;bottom:20%;">Answer a few questions to see if the DIH can help you put your information potential to work.<br /><br /><span style="font-weight:bold;"><a href="#" style="color:#fff;">Take the survey</a></span></p>
+                        --><div class="bottomborder"></div>
+                </li>
+        </ul>
+                
 </div>
 </div>
 
 <div id="nav">
-	<div id ="nav-center">
-		
-		<!-- <span class="pageNav">1</span> / 15&nbsp;&nbsp;  -->
-		
-		<div id="slideNav">
-			<a id="slide2" style="float:left; margin-right:4px;color:white" href="#">PREV</a>&nbsp;&nbsp;
-			<a href="#1" class="numnav activeNav">1</a> 
-			<a href="#2" class="numnav">2</a> 
-			<a href="#3" class="numnav">3</a>  
-			<a href="#4" class="numnav">4</a>  
-			<a href="#5" class="numnav">5</a>  
-			<a href="#6" class="numnav">6</a>  
-			<a href="#7" class="numnav">7</a>  
-			<a href="#8" class="numnav">8</a>  
-			<a href="#9" class="numnav">9</a>  
-			<a href="#10" class="numnav">10</a>  
-			<a href="#11" class="numnav">11</a>  
-			<a href="#12" class="numnav">12</a>  
-			<a href="#13" class="numnav">13</a>  
-			<a href="#14" class="numnav">14</a>  
-			<a href="#15" class="numnav">15</a>&nbsp;&nbsp;
-			<a id="slide1" style="float:left; margin-left:6px;color:white" href="#">NEXT</a>
-		</div>
-	</div>
+        <div id ="nav-center">
+                
+                <!-- <span class="pageNav">1</span> / 15&nbsp;&nbsp;  -->
+                
+                <div id="slideNav">
+                        <a id="slide2" style="float:left; margin-right:4px;color:white" href="#">PREV</a>&nbsp;&nbsp;
+                        <a href="#1" class="numnav activeNav">1</a> 
+                        <a href="#2" class="numnav">2</a> 
+                        <a href="#3" class="numnav">3</a>  
+                        <a href="#4" class="numnav">4</a>  
+                        <a href="#5" class="numnav">5</a>  
+                        <a href="#6" class="numnav">6</a>  
+                        <a href="#7" class="numnav">7</a>  
+                        <a href="#8" class="numnav">8</a>  
+                        <a href="#9" class="numnav">9</a>  
+                        <a href="#10" class="numnav">10</a>  
+                        <a href="#11" class="numnav">11</a>  
+                        <a href="#12" class="numnav">12</a>  
+                        <a href="#13" class="numnav">13</a>  
+                        <a href="#14" class="numnav">14</a>  
+                        <a href="#15" class="numnav">15</a>&nbsp;&nbsp;
+                        <a id="slide1" style="float:left; margin-left:6px;color:white" href="#">NEXT</a>
+                </div>
+        </div>
 </div>
 
 </body>
