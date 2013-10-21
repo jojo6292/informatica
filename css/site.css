@@ -88,6 +88,8 @@ p{font-size: 18px; line-height:20px;}
 .animator{z-index:200 ; position:absolute; top:0; left:0}
 .animator_mask{z-index: 210 ; position:absolute; top:49%; left:49%; opacity: 0;}
 .numnav{color:black;background-image:url('../img/numbg.png'); width:16px; height:16px;display:block;float:left; background-repeat: no-repeat; font-size:10px; margin-left:6px;padding-top:3px; }
+#slideNav a.activeNav{color:#f00;}
+
 a{text-decoration: none;}
 
 .ui-body-c .ui-link:visited {color:white}

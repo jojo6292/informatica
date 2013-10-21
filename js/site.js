@@ -61,6 +61,8 @@ $('#slideNav .numnav').click(function() {
 	var slideNumber = getCurrentSlide();
 	var variance = gotoslide-slideNumber; // number of slides to traverse
 	
+	$('.numnav').eq(slideNumber-1).removeClass('activeNav');
+	
 	if (variance > 0) {
 		animatorLoop(variance);
 	}
@@ -78,6 +80,7 @@ function animatorLoop(loop){
 	
 	var first = $('ul li:first');
 	resetAnimation(getCurrentSlide(first)); // reset animation when moving off slide
+	
 	
 	for (var i = 1; i < loop; i++) {
 		var first = $('ul li:first');
@@ -113,7 +116,9 @@ function animator(){
 	tl.to("#container", 0.5, {css:{left:-w+"px"}, onComplete:suffix});
 	tl.restart();
 	var first = $('ul li:first');
-	resetAnimation(getCurrentSlide(first)); // reset animation when moving off slide
+	var slideNumber = getCurrentSlide(first);
+	resetAnimation(slideNumber); // reset animation when moving off slide
+	$('.numnav').eq(slideNumber-1).removeClass('activeNav');
 }
 
 // runs after advancing to the right
@@ -135,7 +140,9 @@ function suffix(){
 // using PREV button to navigate
 function reanimator(){
 	current = $( "ul li:first" ); 
-	resetAnimation(getCurrentSlide(current));
+	var slideNumber = getCurrentSlide(current);
+	resetAnimation(slideNumber);
+	$('.numnav').eq(slideNumber-1).removeClass('activeNav');
 	
 	$('#container').css('left',-w +'px');
 	var lasting = $('ul li:last-child');
@@ -156,22 +163,17 @@ function prefix(){
 }
 
 // plays animation on the current slide
-function playAnimation(slideNumber) {
-	// update to switch case
-	
+function playAnimation(slideNumber) {	
 	switch (slideNumber) {
 		case '2':
 			tl_2.play();
-			console.log('slide 2 play');
 			break;
 		case '14':
 			tl_14.play();
-			console.log('slide 14 play');
 			break;
 		default:
 			// no matching animation
 	}
-
 }
 
 // resets animation after moving off slide
@@ -179,11 +181,9 @@ function resetAnimation(slideNumber) {
 	switch (slideNumber) {
 		case '2':
 			tl_2.reverse();
-			console.log('slide 2 reverse');
 			break;
 		case '14':
 			tl_14.reverse();
-			console.log('slide 14 reverse');
 			break;
 		default:
 			// no matching animation
@@ -198,9 +198,10 @@ function getCurrentSlide(){
 	return slideNumber;
 }
 
-// not currently used in frontend, but is for updating the current page number displayed
+// updating the current page number displayed
 function updatePagination(){
-	$('.pageNav').html(getCurrentSlide());
+//	$('.pageNav').html(getCurrentSlide());
+	$('.numnav').eq(getCurrentSlide()-1).addClass('activeNav');
 }
 
 // swipe left/right to navigate (tablet)
