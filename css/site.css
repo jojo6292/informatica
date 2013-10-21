@@ -95,7 +95,10 @@ a{text-decoration: none;}
 
 @media (min-width: 1200px) and (min-height: 900px) {
 	p{font-size:22px; line-height:28px;}
+	#slideNav {font-size:20px;line-height:25px; width:650px;}
+	.numnav {font-size:16px; background-image:url('../img/numbgbig.png');background-size:25px; width:25px; height:25px; line-height:21px;}
 	
+	#two {background-size:80%;}
 	#two .section { top:40%; }
 	#two .section p { width:85%; }
 	
@@ -107,19 +110,23 @@ a{text-decoration: none;}
 	#four .section {top:50%;}
 	#four .section p {width:70%;}
 	
+	#five { background-size:80%;}
+	
+	#six .section {top:15%;}
+	
 	#seven { background-size:85%; background-position:20% 10%; }
-	#seven .section {top:60%;}
+	#seven .section {top:65%; left:40%;}
 	
 	#eight .section {top:40%;}
-	#eight .bullets { font-size:20px; padding-top:20px; }
+	#eight .bullets { font-size:20px; padding-top:40px; }
 	
 	#nine .section {width:23%; top:30%;}
 	
 	#ten { background-size:50%; }
 	#ten .section p { width:85%; }
 	
-	#eleven { background-size:90%; }
-	#eleven .section { top:75%; }
+	#eleven { background-size:90%; background-position:50% 60%; }
+	#eleven .section { top:76%; }
 	
 	#thirteen .section p {width:440px;}
 	#thirteen .factLeft {width:440px;}
