@@ -157,9 +157,10 @@ $('#masker').css('height',h+'px');
 
 // slide animations
 var tl = new TimelineLite;
-var tl_slide2 = new TimelineLite;
-//tl_slide2.to("#circleAn", 1, {css:{left:200}});
-tl_slide2.pause();
+
+var tl_2 = new TimelineLite;
+//tl_2.to("#circleAn", 1, {css:{left:200}});
+tl_2.pause();
 
 var tl_14 = new TimelineLite;
 tl_14.to('#DIHscale', 1, {opacity:1,scaleX:48, scaleY:48});
@@ -268,11 +269,34 @@ function prefix(){
 }
 
 function playAnimation(slideNumber) {
-	if(slideNumber == 2){tl_slide2.play();console.log('slide2play');}
-	else{tl_slide2.reverse();console.log('slide2reset');}
+/*
+	if(slideNumber == 2){tl_2.play();}
+	else{tl_2.reverse();}
 	
-	if(slideNumber == 14){tl_14.play();console.log('slide14play');}
-	else{tl_14.reverse();console.log('slide14reset');}
+	if(slideNumber == 14){tl_14.play();}
+	else{tl_14.reverse();}
+*/
+	// update to switch case
+	
+	switch (slideNumber) {
+		case '2':
+			tl_2.play();
+			break;
+		case '14':
+			tl_14.play();
+			console.log('slide 14 play');
+			break;
+		default:
+			// no matching animation
+			resetAnimations();
+			console.log('reset animations');
+	}
+
+}
+
+function resetAnimations() {
+	tl_2.reverse();
+	tl_14.reverse();
 }
 
 function getCurrentSlide(){
