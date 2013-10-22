@@ -125,7 +125,6 @@ function animator(){
 function suffix(){
 	$('#container').css('left',"0px");
 	var first = $('ul li:first');
-	
 	$(first).appendTo('ul');
 	
 	current = $( "ul li:first" ); 
@@ -160,13 +159,31 @@ function reanimator(){
 function prefix(){
 	playAnimation(getCurrentSlide());
 	updatePagination();
-
 }
-function prefix_sr(){
-	playAnimation(getCurrentSlide());
-	updatePagination_sr();
 
-}
+// swipe right to navigate (tablet)
+$("#container").on("swiperight",function(){ // move left
+	current = $( "ul li:first" ); 
+	var slideNumber = getCurrentSlide(current);
+	resetAnimation(slideNumber);
+	$('.numnav').eq(slideNumber-1).removeClass('activeNav');
+	
+	$('#container').css('left',-w +'px');
+	var lasting = $('ul li:last-child');
+	$(lasting).prependTo('ul');
+	current = $( "ul li:first" ); 
+	TweenMax.to("#container", 1, {css:{left:0}, onComplete:prefix});
+});
+
+// swipe left to navigate (tablet)
+$("#container").on("swipeleft",function(){ // move right
+	TweenMax.to("#container", 1, {css:{left:-w+"px"}, onComplete:suffix});
+	
+	var first = $('ul li:first');
+	var slideNumber = getCurrentSlide(first);
+	resetAnimation(slideNumber); // reset animation when moving off slide
+	$('.numnav').eq(slideNumber-1).removeClass('activeNav');
+});
 
 // plays animation on the current slide
 function playAnimation(slideNumber) {	
@@ -196,37 +213,19 @@ function resetAnimation(slideNumber) {
 	}
 }
 
-
 // returns current slide number
 function getCurrentSlide(){
 	var slideNumber = current.data("title");
 	slideNumber = slideNumber.replace("slide",""); // changes from slideY to Y
 	return slideNumber;
-
-
 }
 
 // updating the current page number displayed
 function updatePagination(){
 //	$('.pageNav').html(getCurrentSlide());
 	$('.numnav').eq(getCurrentSlide()-1).addClass('activeNav');
-	$('.numnav').eq(getCurrentSlide()-2).removeClass('activeNav');
-
 }
-function updatePagination_sr(){
-//	$('.pageNav').html(getCurrentSlide());
-	console.log('what is the slidenumber?');
-	current = $( "ul li:first" ); 
-	$('.numnav').eq(getCurrentSlide()+14).addClass('activeNav');
-	$('.numnav').eq(getCurrentSlide()+1).removeClass('activeNav');
-	
-	var slideNumber = current.data("title");
-	console.log(slideNumber);
 
-
-
-
-}
 
 $('#reveal_one').bind('click' , rev_one);
 $('#reveal_two').bind('click' , rev_two);
@@ -328,22 +327,5 @@ function rev_four_revert(){
 	
 }
 
-
-// swipe left/right to navigate (tablet)
-$("#container").on("swiperight",function(){
-	$('#container').css('left',-w +'px');
-	var lasting = $('ul li:last-child');
-	$(lasting).prependTo('ul');
-	TweenMax.to("#container", 1, {css:{left:0}, onComplete:prefix_sr});
-
-	//playAnimation(getCurrentSlide());
-
-});
-	
-$("#container").on("swipeleft",function(){
-	TweenMax.to("#container", 1, {css:{left:-w+"px"}, onComplete:suffix});
-	//playAnimation(getCurrentSlide());
-
-});
 
 }); 
