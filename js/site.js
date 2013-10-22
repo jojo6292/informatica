@@ -160,6 +160,12 @@ function reanimator(){
 function prefix(){
 	playAnimation(getCurrentSlide());
 	updatePagination();
+
+}
+function prefix_sr(){
+	playAnimation(getCurrentSlide());
+	updatePagination_sr();
+
 }
 
 // plays animation on the current slide
@@ -197,6 +203,7 @@ function getCurrentSlide(){
 	slideNumber = slideNumber.replace("slide",""); // changes from slideY to Y
 	return slideNumber;
 
+
 }
 
 // updating the current page number displayed
@@ -204,6 +211,20 @@ function updatePagination(){
 //	$('.pageNav').html(getCurrentSlide());
 	$('.numnav').eq(getCurrentSlide()-1).addClass('activeNav');
 	$('.numnav').eq(getCurrentSlide()-2).removeClass('activeNav');
+
+}
+function updatePagination_sr(){
+//	$('.pageNav').html(getCurrentSlide());
+	console.log('what is the slidenumber?');
+	current = $( "ul li:first" ); 
+	$('.numnav').eq(getCurrentSlide()+14).addClass('activeNav');
+	$('.numnav').eq(getCurrentSlide()+1).removeClass('activeNav');
+	
+	var slideNumber = current.data("title");
+	console.log(slideNumber);
+
+
+
 
 }
 
@@ -313,7 +334,8 @@ $("#container").on("swiperight",function(){
 	$('#container').css('left',-w +'px');
 	var lasting = $('ul li:last-child');
 	$(lasting).prependTo('ul');
-	TweenMax.to("#container", 1, {css:{left:0, onComplete:prefix}});
+	TweenMax.to("#container", 1, {css:{left:0}, onComplete:prefix_sr});
+
 	//playAnimation(getCurrentSlide());
 
 });
