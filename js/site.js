@@ -204,6 +204,107 @@ function updatePagination(){
 	$('.numnav').eq(getCurrentSlide()-1).addClass('activeNav');
 }
 
+$('#reveal_one').bind('click' , rev_one);
+$('#reveal_two').bind('click' , rev_two);
+$('#reveal_three').bind('click' , rev_three);
+$('#reveal_four').bind('click' , rev_four);
+
+function rev_one(){
+	$('.R_one').css('background-color','white');
+	$('.R_one').css('color','#d62631');
+	$('.R_one').css('font-size', 20+'px');
+	$( ".R_one" ).removeClass( "reveal" ).addClass( "revealed" );
+
+	$('.R_one').html('<span style="text-align:center; padding-top:10px;">Right-time data delivery</span>');
+	$('#reveal_one').unbind('click' , rev_one);
+	$('#reveal_one').bind('click' , rev_one_revert);
+	
+}
+
+function rev_one_revert(){
+	$('.R_one').css('background-color','#d62631');
+	$('.R_one').css('color','white');
+	$('.R_one').css('font-size', 12+'px');
+	$('.R_one').html('<span class="bold">Self-managed persistency</span><br/>Support any latency mode with automated storage, and reduce transactional system overhead by accessing data sources only once.<br/><br/>');
+	$( ".R_one" ).removeClass( "revealed" ).addClass( "reveal" );
+
+	$('#reveal_one').bind('click' , rev_one);
+	$('#reveal_one').unbind('click' , rev_one_revert);
+	
+}
+function rev_two(){
+	$('.R_two').css('background-color','white');
+	$('.R_two').css('color','#d62631');
+	$('.R_two').css('font-size', 20+'px');
+	$( ".R_two" ).removeClass( "reveal" ).addClass( "revealed" );
+
+	$('.R_two').html('<span>Trusted data for all</span>');
+	$('#reveal_two').unbind('click' , rev_two);
+	$('#reveal_two').bind('click' , rev_two_revert);
+	
+}
+
+function rev_two_revert(){
+	$('.R_two').css('background-color','#d62631');
+	$('.R_two').css('color','white');
+	$('.R_two').css('font-size', 12+'px');
+	$('.R_two').html('<span class="bold">Complete data management</span><br/>Regain trust in your data, and promote data reuse through customizable subscription data catalogs.<br/><br/>');
+	$( ".R_two" ).removeClass( "revealed" ).addClass( "reveal" );
+
+	$('#reveal_two').bind('click' , rev_two);
+	$('#reveal_two').unbind('click' , rev_two_revert);
+	
+}
+
+function rev_three(){
+	$('.R_three').css('background-color','white');
+	$('.R_three').css('color','#d62631');
+	$('.R_three').css('font-size', 20+'px');
+	$( ".R_three" ).removeClass( "reveal" ).addClass( "revealed_three" );
+	console.log('fiuck///')
+	$('.R_three').html('<span>Untangle the hairball<br/>decouple your applications</span>');
+	$('#reveal_three').unbind('click' , rev_three);
+	$('#reveal_three').bind('click' , rev_three_revert);
+	
+}
+
+function rev_three_revert(){
+	$('.R_three').css('background-color','#d62631');
+	$('.R_three').css('color','white');
+	$('.R_three').css('font-size', 12+'px');
+	$('.R_three').html('<span class="bold">Efficient interaction management</span><br/>Reduce application interdependence through "publish and subscribe" integration. Add, change, or retire systems with ease.<br/><br/>');
+	$( ".R_three" ).removeClass( "revealed_three" ).addClass( "reveal" );
+
+	$('#reveal_three').bind('click' , rev_three);
+	$('#reveal_three').unbind('click' , rev_three_revert);
+	
+}
+
+function rev_four(){
+	$('.R_four').css('background-color','white');
+	$('.R_four').css('color','#d62631');
+	$('.R_four').css('font-size', 20+'px');
+	$( ".R_four" ).removeClass( "reveal" ).addClass( "revealed" );
+
+	$('.R_four').html("<span>See what you're missing</span>");
+	$('#reveal_four').unbind('click' , rev_four);
+	$('#reveal_four').bind('click' , rev_four_revert);
+	
+}
+
+function rev_four_revert(){
+	$('.R_four').css('background-color','#d62631');
+	$('.R_four').css('color','white');
+	$('.R_four').css('font-size', 12+'px');
+	$('.R_four').html('<span class="bold">Complete data management</span><br/>Regain trust in your data, and promote data reuse through customizable subscription data catalogs.<br/><br/>');
+	$( ".R_four" ).removeClass( "revealed" ).addClass( "reveal" );
+
+	$('#reveal_four').bind('click' , rev_four);
+	$('#reveal_four').unbind('click' , rev_four_revert);
+	
+}
+
+
 // swipe left/right to navigate (tablet)
 $("#container").on("swiperight",function(){
 	$('#container').css('left',-w +'px');

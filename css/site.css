@@ -54,6 +54,7 @@ background-position:80% 50%;
 #eleven{background-image: url(../img/slide_011.png); background-position:50% 10%;}
 #eleven .section {top:580px;width:85%;}
 
+#twelve{background-image: url(../img/slide_012.png);background-position:-50px 0px;background-size:75%}
 #twelve .section {top:80px;width:85%;}
 #twelve .section table tr th {font-weight:bold; border-bottom:2px solid #fff; padding-bottom:10px;}
 #twelve .section table tr td {line-height:20px;}
@@ -94,6 +95,21 @@ a{text-decoration: none;}
 
 .ui-body-c .ui-link:visited {color:white}
 .ui-body-c .ui-link:visited{color:black}
+.ui-body-c .ui-link:active {color:white}
+.ui-body-c .ui-link{color:white}
+.ui-body-c .ui-link:hover{color:white}
+.row .ui-body-c .ui-link {font-weight:normal;}
+
+.twelve_header{text-transform: uppercase; font-size:20px}
+.bold{font-weight: bold;font-size:16px;}
+.row{position:relative; margin-top:23%}
+.left_col{width:400px; font-size:12px; position:relative; float:left}
+.right_col{width:400px; font-size:12px; position:relative; float:left;margin-left:50px; }
+.reveal{margin-bottom:10px; height:100px; font-weight:normal}
+.left_col .reveal{font-size:12px}
+.right_col .reveal{font-size:12px}
+.revealed{text-align:center; font-weight: bold;font-size: 22px; padding-top:40px;height:60px;margin-bottom:10px;border-radius: 8px;}
+.revealed_three{text-align:center; font-weight: bold;font-size: 22px; padding-top:30px;height:70px;margin-bottom:10px;border-radius: 8px;}
 
 @media (min-width: 1200px) and (min-height: 900px) {
 	p{font-size:22px; line-height:28px;}
@@ -129,6 +145,9 @@ a{text-decoration: none;}
 	
 	#eleven { background-size:90%; background-position:50% 60%; }
 	#eleven .section { top:76%; }
+	
+	#twelve { background-size:90%; background-position:-50px 10px; }
+
 	
 	#thirteen .section p {width:440px;}
 	#thirteen .factLeft {width:440px;}
