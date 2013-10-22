@@ -196,12 +196,15 @@ function getCurrentSlide(){
 	var slideNumber = current.data("title");
 	slideNumber = slideNumber.replace("slide",""); // changes from slideY to Y
 	return slideNumber;
+
 }
 
 // updating the current page number displayed
 function updatePagination(){
 //	$('.pageNav').html(getCurrentSlide());
 	$('.numnav').eq(getCurrentSlide()-1).addClass('activeNav');
+	$('.numnav').eq(getCurrentSlide()-2).removeClass('activeNav');
+
 }
 
 $('#reveal_one').bind('click' , rev_one);
@@ -311,10 +314,14 @@ $("#container").on("swiperight",function(){
 	var lasting = $('ul li:last-child');
 	$(lasting).prependTo('ul');
 	TweenMax.to("#container", 1, {css:{left:0, onComplete:prefix}});
+	//playAnimation(getCurrentSlide());
+
 });
 	
 $("#container").on("swipeleft",function(){
 	TweenMax.to("#container", 1, {css:{left:-w+"px"}, onComplete:suffix});
+	//playAnimation(getCurrentSlide());
+
 });
 
 }); 
